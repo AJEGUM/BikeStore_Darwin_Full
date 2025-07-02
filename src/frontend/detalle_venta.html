@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Venta - Panel de Administración</title>
+    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="detalle_venta.css">
+</head>
+<body>
+    <header>
+        <nav style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h1 style="display:inline-block; margin-right: 30px;">Panel de Administración</h1>
+                <a href="panel.html">Productos</a>
+                <a href="stock.html">Stock</a>
+                <a href="usuarios.html">Usuarios</a>
+                <a href="ventas.html">Ventas</a>
+                <a href="detalle_venta.html">Detalles de Venta</a>
+            </div>
+            <div id="userSection">
+                <span id="userName"></span>
+                <button id="logoutBtn" style="display: none;">Cerrar Sesión</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h2>Detalles de Venta</h2>
+        <div id="detalleVentasContainer" style="padding-left:40px;padding-right:40px;">
+            <table id="tablaDetalleVentas" style="border-collapse:collapse;width:100%;margin-top:20px;">
+                <thead>
+                    <tr>
+                        <th>ID Detalle</th>
+                        <th>ID Venta</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="mensajeDetalleVentas"></div>
+        </div>
+    </main>
+    <script src="detalle_venta.js"></script>
+</body>
+</html> 

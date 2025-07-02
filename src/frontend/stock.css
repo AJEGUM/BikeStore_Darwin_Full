@@ -1,0 +1,133 @@
+body {
+    background: #f7f7f7;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+.stock-alert { 
+    background: #ffeaea !important; 
+    color: #c0392b; 
+    font-weight: bold; 
+    border-radius: 6px;
+    padding: 6px 0;
+}
+
+.stock-table { 
+    border-collapse: collapse; 
+    width: 100%; 
+    margin: 30px auto 0 auto; 
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px #0001;
+}
+
+.stock-table th, .stock-table td { 
+    border: 1px solid #e0e0e0; 
+    padding: 10px 12px; 
+    text-align: left; 
+}
+
+.stock-table th { 
+    background: #e3f2fd; 
+    color: #222;
+}
+
+.stock-table tr:nth-child(even) { 
+    background: #f7fafd; 
+}
+
+.stock-table tr:nth-child(odd) { 
+    background: #fff; 
+}
+
+.stock-table input[type='number'] { 
+    width: 70px; 
+    padding: 5px 8px; 
+    border: 1.5px solid #b3c6e0;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: #fff;
+    transition: border 0.2s;
+}
+
+.stock-table input[type='number']:focus {
+    border: 1.5px solid #2196f3;
+    outline: none;
+}
+
+.guardar-btn, .btn-editar {
+    background: #ffd600;
+    color: #222;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: background 0.2s;
+}
+
+.guardar-btn:hover, .btn-editar:hover {
+    background: #ffe082;
+}
+
+.btn-eliminar {
+    background: #e57373;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-eliminar:hover {
+    background: #c62828;
+}
+
+#stockContainer { 
+    padding-left: 40px; 
+    padding-right: 40px; 
+    margin-top: 30px;
+}
+
+#stockContainer .stock-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+#stockContainer .stock-table th, #stockContainer .stock-table td {
+    border: 1px solid #b3c6e0;
+    padding: 8px 10px;
+    text-align: left;
+}
+
+#stockContainer .stock-table th {
+    background: #eaf1fb;
+    color: #222;
+}
+
+#stockContainer .even-row { 
+    background: #f7fafd; 
+}
+
+#stockContainer .odd-row { 
+    background: #fff; 
+}
+
+.guardar-btn {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.guardar-btn:hover {
+    background: #217dbb;
+} 

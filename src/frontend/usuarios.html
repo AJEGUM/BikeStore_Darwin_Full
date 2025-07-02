@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios - Panel de Administración</title>
+    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="usuarios.css">
+</head>
+<body>
+    <header>
+        <nav style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h1 style="display:inline-block; margin-right: 30px;">Panel de Administración</h1>
+                <a href="panel.html">Productos</a>
+                <a href="stock.html">Stock</a>
+                <a href="usuarios.html">Usuarios</a>
+                <a href="ventas.html">Ventas</a>
+                <a href="detalle_venta.html">Detalles de Venta</a>
+            </div>
+            <div id="userSection">
+                <span id="userName"></span>
+                <button id="logoutBtn" style="display: none;">Cerrar Sesión</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h2>Gestión de Usuarios</h2>
+        <div class="filtro-rol">
+            <label for="filtroRol">Filtrar por rol:</label>
+            <select id="filtroRol">
+                <option value="todos">Todos</option>
+                <option value="admin">Admin</option>
+                <option value="cliente">Cliente</option>
+            </select>
+        </div>
+        <div id="usuariosContainer">
+            <table id="tablaUsuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Rol</th>
+                        <th>Fecha Registro</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="mensajeUsuario"></div>
+        <div id="formEditarUsuario" style="display:none; margin-top:20px;">
+            <h3>Editar Usuario</h3>
+            <form id="editarUsuarioForm">
+                <input type="hidden" id="edit_id_usuario">
+                <div>
+                    <label for="edit_nombre">Nombre:</label>
+                    <input type="text" id="edit_nombre" required>
+                </div>
+                <div>
+                    <label for="edit_apellido">Apellido:</label>
+                    <input type="text" id="edit_apellido" required>
+                </div>
+                <div>
+                    <label for="edit_telefono">Teléfono:</label>
+                    <input type="text" id="edit_telefono" required>
+                </div>
+                <div>
+                    <label for="edit_rol">Rol:</label>
+                    <select id="edit_rol" required>
+                        <option value="cliente">Cliente</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" id="cancelarEditar">Cancelar</button>
+            </form>
+        </div>
+    </main>
+    <script src="usuarios.js"></script>
+</body>
+</html> 

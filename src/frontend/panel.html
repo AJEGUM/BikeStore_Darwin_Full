@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="panel.css">
+    <link rel="stylesheet" href="panel_extra.css">
+</head>
+<body>
+    <header>
+        <nav style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h1 style="display:inline-block; margin-right: 30px;">Panel de Administración</h1>
+                <a href="panel.html">Productos</a>
+                <a href="stock.html">Stock</a>
+                <a href="usuarios.html">Usuarios</a>
+                <a href="ventas.html">Ventas</a>
+                <a href="detalle_venta.html">Detalles de Venta</a>
+            </div>
+            <div id="userSection">
+                <span id="userName"></span>
+                <button id="logoutBtn" style="display: none;">Cerrar Sesión</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h2>Bienvenido al Panel de Administración</h2>
+        <div id="adminContent">
+            <h3>Registrar Producto</h3>
+            <form id="productoForm">
+                <div>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div>
+                    <label for="precio_venta">Precio de Venta:</label>
+                    <input type="number" id="precio_venta" name="precio_venta" min="0" step="0.01" required>
+                </div>
+                <div>
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" required></textarea>
+                </div>
+                <div>
+                    <label for="imagen">Imagen:</label>
+                    <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                    <br>
+                    <img id="previewImagen" src="#" alt="Preview" style="display:none;max-width:120px;max-height:80px;margin-top:8px;" />
+                </div>
+                <div>
+                    <label for="categoria">Categoría:</label>
+                    <input type="text" id="categoria" name="categoria" required>
+                </div>
+                <div>
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" name="marca" required>
+                </div>
+                <button type="submit">Registrar Producto</button>
+            </form>
+            <div id="mensajeProducto"></div>
+            <hr>
+            <h3>Lista de Productos</h3>
+            <div id="listaProductos"></div>
+        </div>
+    </main>
+    <script src="panel.js"></script>
+</body>
+</html>

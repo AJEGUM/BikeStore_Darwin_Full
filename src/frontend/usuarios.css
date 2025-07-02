@@ -1,0 +1,87 @@
+body {
+    background: #f7f7f7;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+#usuariosContainer {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 30px;
+}
+#tablaUsuarios {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1rem;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px #0001;
+}
+#tablaUsuarios th, #tablaUsuarios td {
+    border: 1px solid #e0e0e0;
+    padding: 10px 12px;
+    text-align: left;
+}
+#tablaUsuarios th {
+    background: #e3f2fd;
+    color: #222;
+}
+.even-row { background: #f7fafd; }
+.odd-row { background: #fff; }
+.btn-editar {
+    background: #ffd600;
+    color: #222;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: background 0.2s;
+}
+.btn-editar:hover {
+    background: #ffe082;
+}
+.btn-eliminar {
+    background: #e57373;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-eliminar:hover {
+    background: #c62828;
+}
+#formEditarUsuario {
+    background: #fff;
+    border: 2px solid #b3c6e0;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 30px auto 0 auto;
+    padding: 24px 28px 18px 28px;
+    box-shadow: 0 2px 12px #0002;
+}
+#formEditarUsuario h3 {
+    margin-top: 0;
+}
+#formEditarUsuario form > div {
+    margin-bottom: 12px;
+}
+#formEditarUsuario button {
+    margin-right: 10px;
+}
+input, select {
+    border: 1.5px solid #b3c6e0;
+    border-radius: 5px;
+    padding: 7px 10px;
+    font-size: 1rem;
+    background: #fff;
+    transition: border 0.2s;
+}
+input:focus, select:focus {
+    border: 1.5px solid #2196f3;
+    outline: none;
+} 
