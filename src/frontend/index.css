@@ -497,3 +497,46 @@ input:focus, select:focus, textarea:focus {
         width: 100%;
     }
 } 
+
+.imagen-titulo-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 32px auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px #0002;
+}
+.imagen-titulo-img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    min-height: 260px;
+    max-height: 340px;
+    filter: brightness(0.85);
+}
+.imagen-titulo-texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 2.6rem;
+    font-weight: bold;
+    text-shadow: 0 4px 16px #000a, 0 1px 0 #333;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 12px 32px;
+    background: rgba(0,0,0,0.18);
+    border-radius: 12px;
+}
+@media (max-width: 700px) {
+    .imagen-titulo-texto {
+        font-size: 1.4rem;
+        padding: 8px 10px;
+    }
+    .imagen-titulo-img {
+        min-height: 140px;
+        max-height: 180px;
+    }
+} 
