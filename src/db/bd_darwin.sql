@@ -1,5 +1,5 @@
--- CREATE DATABASE bikestore;
-USE bikestore;
+create database bikestore_darwin;
+USE bikestore_darwin;
 
 -- Tabla: productos
 CREATE TABLE productos (
@@ -7,7 +7,7 @@ CREATE TABLE productos (
     nombre VARCHAR(255) ,
     precio_venta DECIMAL(10,2)  CHECK (precio_venta >= 0),
     descripcion VARCHAR(500),
-    imagen VARCHAR(255),
+    imagen longtext,
     categoria VARCHAR(100),
     marca VARCHAR(100)
 );
@@ -58,8 +58,6 @@ CREATE TABLE detalles_venta (
     FOREIGN KEY (id_venta) REFERENCES ventas(id_venta)
 );
 
-
-/*Consultas*/
 /*UPDATE usuarios
 SET rol = 'admin'
 WHERE id_usuario = 1;*/
