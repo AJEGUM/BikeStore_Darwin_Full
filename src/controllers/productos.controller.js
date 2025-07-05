@@ -10,15 +10,23 @@ class ProductosController {
         try {
             const query = `
                 SELECT 
-                    id_producto,
-                    nombre,
-                    precio_venta,
-                    descripcion,
-                    imagen,
-                    categoria,
-                    marca
-                FROM productos 
-                ORDER BY id_producto DESC
+                    p.id_producto,
+                    p.nombre,
+                    p.precio_venta,
+                    p.descripcion,
+                    p.imagen,
+                    p.categoria,
+                    p.marca,
+                    COALESCE(s.stock, 0) as stock,
+                    COALESCE(s.stock_minimo, 0) as stock_minimo,
+                    CASE 
+                        WHEN COALESCE(s.stock, 0) <= 0 THEN 'agotado'
+                        WHEN COALESCE(s.stock, 0) <= COALESCE(s.stock_minimo, 0) THEN 'bajo'
+                        ELSE 'disponible'
+                    END as estado_stock
+                FROM productos p
+                LEFT JOIN stocks s ON p.id_producto = s.id_producto
+                ORDER BY p.id_producto DESC
             `;
             
             const [rows] = await db.execute(query);
@@ -27,6 +35,8 @@ class ProductosController {
             const productos = rows.map(producto => ({
                 ...producto,
                 precio_venta: parseFloat(producto.precio_venta),
+                stock: parseInt(producto.stock),
+                stock_minimo: parseInt(producto.stock_minimo),
                 tiene_imagen: !!producto.imagen
             }));
 

@@ -363,4 +363,137 @@ input:focus, select:focus, textarea:focus {
     .footer-logo {
         margin-bottom: 10px;
     }
+}
+
+/* Estilos para productos sin stock */
+.producto.sin-stock {
+    opacity: 0.6;
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.producto.sin-stock:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+    box-shadow: 0 2px 12px #0001;
+}
+
+.producto.sin-stock .agregar-carrito-btn {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.producto.sin-stock .agregar-carrito-btn:hover {
+    background: #ccc;
+}
+
+.producto.stock-bajo {
+    border-color: #ff9800;
+    background: #fff8e1;
+}
+
+.producto.stock-bajo:hover {
+    background: #fff3cd;
+    border-color: #ff9800;
+}
+
+.stock-info {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.producto.sin-stock .stock-info {
+    background: #f44336;
+    color: white;
+}
+
+.producto.stock-bajo .stock-info {
+    background: #ff9800;
+    color: white;
+}
+
+/* Estilos para la barra de búsqueda */
+.busqueda-container {
+    margin: 20px 0 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.busqueda-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.busqueda-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 1rem;
+    background: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.busqueda-input:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.busqueda-btn {
+    background: #2196f3;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.busqueda-btn:hover {
+    background: #1769aa;
+}
+
+.busqueda-btn-limpiar {
+    background: #f5f5f5;
+    color: #666;
+    border: 2px solid #e0e0e0;
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.busqueda-btn-limpiar:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
+/* Responsive para la búsqueda */
+@media (max-width: 600px) {
+    .busqueda-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .busqueda-input {
+        width: 100%;
+    }
+    
+    .busqueda-btn,
+    .busqueda-btn-limpiar {
+        width: 100%;
+    }
 } 

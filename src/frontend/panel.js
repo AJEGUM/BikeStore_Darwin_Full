@@ -35,7 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     listaProductos.innerHTML = '<p>No hay productos registrados.</p>';
                 } else {
                     listaProductos.innerHTML = data.data.map(prod => `
-                        <div class=\"producto-item\" style=\"display:inline-block;vertical-align:top;margin:10px;padding:10px;border:1px solid #ccc;border-radius:8px;min-width:220px;max-width:240px;\">\n                                    <strong>${prod.nombre}</strong><br>\n                                    <span>$${prod.precio_venta}</span><br>\n                                    <em>${prod.categoria} | ${prod.marca}</em><br>\n                                    <span>${prod.descripcion}</span><br>\n                                    ${prod.imagen ? `<img src=\"${prod.imagen}\" alt=\"${prod.nombre}\" style=\"max-width:120px;max-height:80px;margin-top:8px;\">` : '<span style=\"color:#888;\">Sin imagen</span>'}\n                                    <br>\n                                    <button class=\"editar-btn\" data-id=\"${prod.id_producto}\">Editar</button>\n                                    <button class=\"eliminar-btn\" data-id=\"${prod.id_producto}\">Eliminar</button>\n                                </div>\n                    `).join('');
+                        <div class="producto-item">
+                            <img src="${prod.imagen ? prod.imagen : '../bicicleta1.jpg'}" alt="${prod.nombre}">
+                            <div class="producto-nombre">${prod.nombre}</div>
+                            <div class="producto-precio">$${prod.precio_venta}</div>
+                            <div class="producto-categoria">${prod.categoria} | ${prod.marca}</div>
+                            <div class="producto-descripcion">${prod.descripcion}</div>
+                            <button class="editar-btn" data-id="${prod.id_producto}">Editar</button>
+                            <button class="eliminar-btn" data-id="${prod.id_producto}">Eliminar</button>
+                        </div>
+                    `).join('');
 
                     // Asignar eventos a los botones de eliminar
                     document.querySelectorAll('.eliminar-btn').forEach(btn => {

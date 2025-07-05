@@ -5,15 +5,20 @@ const imagenesRoutes = require('./routes/imagenes.routes');
 const db = require('./config/db');
 
 // Middlewares
-// Configuración de CORS para permitir solicitudes desde Live Server
+// Configuración de CORS para permitir solicitudes desde cualquier origen
 app.use(cors({
-  origin: 'http://127.0.0.1:5500',
+  origin: '*', // Permite acceso desde cualquier origen
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Permite el envío de cookies de origen cruzado
 }));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.static('src/frontend')); // Servir archivos estáticos desde src/frontend
+
+// Ruta principal para servir index.html
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/frontend/index.html');
+});
 
 // Rutas
 app.use('/api/imagenes', imagenesRoutes);

@@ -6,7 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const precioMax = document.getElementById('precioMax');
     const limpiarFiltros = document.getElementById('limpiarFiltros');
     
+    // Elementos de búsqueda principal
+    const busquedaInput = document.getElementById('busquedaProductos');
+    const btnBuscar = document.getElementById('btnBuscar');
+    const btnLimpiarBusqueda = document.getElementById('btnLimpiarBusqueda');
+    
     let productosMostrados = [];
+    let todosLosProductos = []; // Para almacenar todos los productos y hacer búsquedas locales
 
     // --- Mostrar productos en el DOM ---
     function mostrarProductos(productos) {
@@ -16,14 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        productosContainer.innerHTML = productos.map(prod => `
-            <div class="producto">
-                <img src="${prod.imagen ? prod.imagen : '../bicicleta1.jpg'}" alt="${prod.nombre}">
-                <div class="producto-nombre">${prod.nombre}</div>
-                <div class="producto-precio">$${prod.precio_venta}</div>
-                <button class="agregar-carrito-btn" data-id="${prod.id_producto}">Agregar al carrito</button>
-            </div>
-        `).join('');
+        productosContainer.innerHTML = productos.map(prod => {
+            const stockClass = prod.estado_stock === 'agotado' ? 'sin-stock' : 
+                              prod.estado_stock === 'bajo' ? 'stock-bajo' : '';
+            const stockText = prod.estado_stock === 'agotado' ? 'Sin stock' : 
+                             prod.estado_stock === 'bajo' ? `Stock bajo (${prod.stock})` : '';
+            
+            return `
+                <div class="producto ${stockClass}">
+                    <img src="${prod.imagen ? prod.imagen : '../bicicleta1.jpg'}" alt="${prod.nombre}">
+                    <div class="producto-nombre">${prod.nombre}</div>
+                    <div class="producto-precio">$${prod.precio_venta}</div>
+                    ${stockText ? `<div class="stock-info">${stockText}</div>` : ''}
+                    <button class="agregar-carrito-btn" data-id="${prod.id_producto}" ${prod.estado_stock === 'agotado' ? 'disabled' : ''}>
+                        ${prod.estado_stock === 'agotado' ? 'Sin stock' : 'Agregar al carrito'}
+                    </button>
+                </div>
+            `;
+        }).join('');
         
         asignarEventosCarrito();
     }
@@ -42,6 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(endpoint);
             const data = await response.json();
             if (response.ok && data.success) {
+                // Almacenar todos los productos para búsquedas locales
+                todosLosProductos = data.data;
+                
                 // Filtrar por precio si se especifican
                 let productosFiltrados = data.data;
                 
@@ -121,6 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const producto = productosMostrados.find(p => p.id_producto === id);
                 if (!producto) return;
 
+                // Verificar si el producto tiene stock disponible
+                if (producto.estado_stock === 'agotado') {
+                    alert(`⚠️ No hay stock disponible para "${producto.nombre}". Por favor, contacta con nosotros para más información.`);
+                    return;
+                }
+
+                // Verificar si hay stock suficiente
+                if (producto.stock <= 0) {
+                    alert(`⚠️ No hay stock disponible para "${producto.nombre}". Por favor, contacta con nosotros para más información.`);
+                    return;
+                }
+
                 const index = carrito.findIndex(item => item.id_producto === id);
 
                 if (index >= 0) {
@@ -131,7 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         nombre: producto.nombre,
                         precio_venta: producto.precio_venta,
                         imagen: producto.imagen,
-                        cantidad: 1
+                        cantidad: 1,
+                        stock_disponible: producto.stock
                     });
                 }
                 localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -232,6 +264,65 @@ document.addEventListener('DOMContentLoaded', () => {
             // Lógica de finalizar compra...
         });
     }
+
+    // --- Funciones de búsqueda principal ---
+    function buscarProductosPrincipal() {
+        const terminoBusqueda = busquedaInput.value.trim().toLowerCase();
+        
+        if (terminoBusqueda === '') {
+            // Si no hay término de búsqueda, usar los filtros existentes
+            buscarProductos();
+            return;
+        }
+        
+        // Filtrar productos localmente
+        const productosFiltrados = todosLosProductos.filter(producto => 
+            producto.nombre.toLowerCase().includes(terminoBusqueda) ||
+            producto.categoria.toLowerCase().includes(terminoBusqueda) ||
+            producto.marca.toLowerCase().includes(terminoBusqueda) ||
+            producto.descripcion.toLowerCase().includes(terminoBusqueda)
+        );
+        
+        // Aplicar filtros de precio si están activos
+        let productosFinales = productosFiltrados;
+        
+        if (precioMin.value && precioMin.value > 0) {
+            productosFinales = productosFinales.filter(prod => prod.precio_venta >= parseFloat(precioMin.value));
+        }
+        
+        if (precioMax.value && precioMax.value > 0) {
+            productosFinales = productosFinales.filter(prod => prod.precio_venta <= parseFloat(precioMax.value));
+        }
+        
+        mostrarProductos(productosFinales);
+    }
+    
+    function limpiarBusquedaPrincipal() {
+        busquedaInput.value = '';
+        // Limpiar también los filtros existentes
+        nombreBusqueda.value = '';
+        precioMin.value = '';
+        precioMax.value = '';
+        buscarProductos();
+    }
+    
+    // Event listeners para búsqueda principal
+    btnBuscar.addEventListener('click', buscarProductosPrincipal);
+    btnLimpiarBusqueda.addEventListener('click', limpiarBusquedaPrincipal);
+    
+    // Búsqueda al presionar Enter
+    busquedaInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            buscarProductosPrincipal();
+        }
+    });
+    
+    // Búsqueda en tiempo real (opcional)
+    busquedaInput.addEventListener('input', () => {
+        if (busquedaInput.value.trim() === '') {
+            buscarProductos();
+        }
+    });
 
     // --- Inicialización ---
     actualizarCarritoCantidad();
